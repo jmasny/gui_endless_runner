@@ -1,3 +1,1 @@
-### Game: Endless runner in Java
-
-First project for GUI
+### Endless runner game in Java
