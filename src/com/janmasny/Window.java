@@ -25,6 +25,10 @@ public class Window extends JFrame {
         this.add(game, BorderLayout.CENTER);
     }
 
+    public void startGame() {
+        game.startGame();
+    }
+
     public void paint(Graphics g) {
         super.paint(g); //bez tego nie wyswietla mi klasy Game
         BufferedImage image = null;
