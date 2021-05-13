@@ -22,12 +22,10 @@ public class Window extends JFrame {
         this.initComponents();
         this.setVisible(true);
 
-        // one bug, background not showing, only game object
+        // one bug, background not showing, only game class paint
         (new Timer(0, (ActionEvent a) -> {
             this.game.repaint();
-            this.repaint();
         })).start();
-        //another way to move an obstacle
     }
 
     private void initComponents() {
@@ -41,7 +39,7 @@ public class Window extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.println("Key pressed");
-                game.jumpSpeedY();
+                game.getHero().jump();
             }
 
             @Override
