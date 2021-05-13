@@ -2,6 +2,8 @@ package com.janmasny;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Game extends JPanel implements Runnable {
 
@@ -24,7 +26,7 @@ public class Game extends JPanel implements Runnable {
     @Override
     public void run() {
         while(true) {
-            System.out.println(i++);
+            //System.out.println(i++);
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
