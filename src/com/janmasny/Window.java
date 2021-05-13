@@ -3,6 +3,7 @@ package com.janmasny;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -20,6 +21,13 @@ public class Window extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComponents();
         this.setVisible(true);
+
+        // one bug, background not showing, only game object
+        (new Timer(0, (ActionEvent a) -> {
+            this.game.repaint();
+            this.repaint();
+        })).start();
+        //another way to move an obstacle
     }
 
     private void initComponents() {
@@ -33,6 +41,7 @@ public class Window extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.println("Key pressed");
+                game.jumpSpeedY();
             }
 
             @Override
@@ -50,7 +59,7 @@ public class Window extends JFrame {
     }
 
     public void paint(Graphics g) {
-        super.paint(g); //bez tego nie wyswietla mi klasy Game
+        super.paint(g); //bez tego nie wyswietla mi klasy Game, rowniez wyswietla background ponownie
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File("resources/obstacle1.png"));
