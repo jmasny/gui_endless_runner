@@ -7,16 +7,18 @@ import java.awt.event.KeyListener;
 
 public class Game extends JPanel implements Runnable {
     public static final float GRAVITY = 0.11f;
-    public static final float FLOOR = 500;
+    public static final float FLOOR = 300;
     private int x = 0;
     private int y = (int) FLOOR;
     private float speedY = 0;
     private Thread thread;
     private Hero hero;
+    private Ground ground;
 
     public Game(){
-        thread = new Thread(this);
-        hero = new Hero();
+        this.thread = new Thread(this);
+        this.hero = new Hero();
+        this.ground = new Ground(this);
     }
 
     public void jumpSpeedY() {
@@ -34,6 +36,7 @@ public class Game extends JPanel implements Runnable {
         g.fillRect(x, y, 100, 100);
         g.setColor(Color.GREEN);
         g.drawLine(0, (int) FLOOR, this.getWidth(), (int) FLOOR);
+        ground.draw(g);
         hero.draw(g);
 
     }
@@ -51,6 +54,7 @@ public class Game extends JPanel implements Runnable {
 //            }
             try {
                 hero.update();
+                ground.update();
                 // repaint(); zrobione w ten sposob nie wyswietla tla z Window, pewnie dlatego, ze metoda paint z game caly czas to zaslania
                 Thread.sleep(20);
             } catch (InterruptedException e) {

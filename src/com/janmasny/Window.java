@@ -17,7 +17,7 @@ public class Window extends JFrame {
     public Window() {
         super();
         this.setTitle("Endless runner");
-        this.setSize(1024, 768);
+        this.setSize(800, 375);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComponents();
         this.setVisible(true);
