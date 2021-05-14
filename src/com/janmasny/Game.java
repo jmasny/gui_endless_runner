@@ -18,6 +18,7 @@ public class Game extends JPanel implements Runnable {
     public Game(){
         this.thread = new Thread(this);
         this.hero = new Hero();
+        this.hero.setX(100);
         this.ground = new Ground(this);
     }
 
