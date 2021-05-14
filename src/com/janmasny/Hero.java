@@ -1,6 +1,7 @@
 package com.janmasny;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import static com.janmasny.Game.FLOOR;
 import static com.janmasny.Game.GRAVITY;
@@ -9,9 +10,15 @@ public class Hero {
     private int x = 0;
     private int y = 0;
     private float speedY = 0;
+    private BufferedImage heroGraphics;
+
+    public Hero() {
+        this.heroGraphics = Resource.getResourceImage("resources/walk_one.png");
+    }
 
     public void updatePosition() {
         // this is made for jumping
+        x += 1;
         if ( y >= FLOOR-100) {
             speedY = 0;
             y = (int) FLOOR - 100; //rectangle width
@@ -27,8 +34,9 @@ public class Hero {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.fillRect(x, y, 100, 100);
+        g.setColor(Color.RED);
+        g.drawRect(x, y, heroGraphics.getWidth(), heroGraphics.getHeight());
+        g.drawImage(heroGraphics, x, y, null);
     }
 
     public float getX() {
