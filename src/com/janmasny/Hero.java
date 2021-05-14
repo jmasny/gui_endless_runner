@@ -10,18 +10,22 @@ public class Hero {
     private int x = 0;
     private int y = 0;
     private float speedY = 0;
-    private BufferedImage heroGraphics;
+    private Animation heroRun;
 
     public Hero() {
-        this.heroGraphics = Resource.getResourceImage("resources/walk_one.png");
+        heroRun = new Animation(100);
+        heroRun.addFrame(Resource.getResourceImage("resources/walk_one.png"));
+        heroRun.addFrame(Resource.getResourceImage("resources/walk_two.png"));
+        heroRun.addFrame(Resource.getResourceImage("resources/walk_three.png"));
+        heroRun.addFrame(Resource.getResourceImage("resources/walk_four.png"));
     }
 
-    public void updatePosition() {
+    public void update() {
+        heroRun.update();
         // this is made for jumping
-        x += 1;
-        if ( y >= FLOOR-100) {
+        if ( y >= FLOOR - heroRun.getFrame().getHeight()) {
             speedY = 0;
-            y = (int) FLOOR - 100; //rectangle width
+            y = (int) FLOOR - heroRun.getFrame().getHeight(); //rectangle width
         } else {
             speedY+=GRAVITY;
             y+=speedY;
@@ -35,8 +39,8 @@ public class Hero {
 
     public void draw(Graphics g) {
         g.setColor(Color.RED);
-        g.drawRect(x, y, heroGraphics.getWidth(), heroGraphics.getHeight());
-        g.drawImage(heroGraphics, x, y, null);
+        g.drawRect(x, y, heroRun.getFrame().getWidth(), heroRun.getFrame().getHeight());
+        g.drawImage(heroRun.getFrame(), x, y, null);
     }
 
     public float getX() {

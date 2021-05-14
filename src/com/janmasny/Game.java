@@ -50,7 +50,7 @@ public class Game extends JPanel implements Runnable {
 //                y+=speedY;
 //            }
             try {
-                hero.updatePosition();
+                hero.update();
                 // repaint(); zrobione w ten sposob nie wyswietla tla z Window, pewnie dlatego, ze metoda paint z game caly czas to zaslania
                 Thread.sleep(20);
             } catch (InterruptedException e) {
