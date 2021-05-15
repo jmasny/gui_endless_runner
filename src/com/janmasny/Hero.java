@@ -1,7 +1,6 @@
 package com.janmasny;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 import static com.janmasny.Game.FLOOR;
 import static com.janmasny.Game.GRAVITY;
@@ -11,6 +10,7 @@ public class Hero {
     private int y = 0;
     private float speedY = 0;
     private Animation heroRun;
+    private Rectangle heroBounds;
 
     public Hero() {
         heroRun = new Animation(100);
@@ -18,6 +18,7 @@ public class Hero {
         heroRun.addFrame(Resource.getResourceImage("resources/walk_two.png"));
         heroRun.addFrame(Resource.getResourceImage("resources/walk_three.png"));
         heroRun.addFrame(Resource.getResourceImage("resources/walk_four.png"));
+        this.heroBounds = new Rectangle();
     }
 
     public void update() {
@@ -30,6 +31,10 @@ public class Hero {
             speedY+=GRAVITY;
             y+=speedY;
         }
+        heroBounds.x = x;
+        heroBounds.y = y;
+        heroBounds.width = heroRun.getFrame().getWidth();
+        heroBounds.height = heroRun.getFrame().getHeight();
     }
 
     public void jump() {
@@ -41,6 +46,10 @@ public class Hero {
         g.setColor(Color.RED);
         g.drawRect(x, y, heroRun.getFrame().getWidth(), heroRun.getFrame().getHeight());
         g.drawImage(heroRun.getFrame(), x, y, null);
+    }
+
+    public Rectangle getHeroBounds(){
+        return heroBounds;
     }
 
     public float getX() {

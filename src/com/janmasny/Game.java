@@ -2,8 +2,6 @@ package com.janmasny;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Game extends JPanel implements Runnable {
     public static final float GRAVITY = 0.11f;
@@ -15,6 +13,7 @@ public class Game extends JPanel implements Runnable {
     private Hero hero;
     private Ground ground;
     private Cloud cloud;
+    private Zombie zombieOne;
 
     public Game(){
         this.thread = new Thread(this);
@@ -22,6 +21,7 @@ public class Game extends JPanel implements Runnable {
         this.hero.setX(100);
         this.ground = new Ground(this);
         this.cloud = new Cloud();
+        this.zombieOne = new Zombie();
     }
 
     public void jumpSpeedY() {
@@ -39,6 +39,7 @@ public class Game extends JPanel implements Runnable {
         g.fillRect(x, y, 100, 100);
         g.setColor(Color.GREEN);
         g.drawLine(0, (int) FLOOR, this.getWidth(), (int) FLOOR);
+        zombieOne.draw(g);
         ground.draw(g);
         cloud.draw(g); //kolejnosc rysowania ma znaczenie dla warst
         hero.draw(g);
@@ -59,6 +60,10 @@ public class Game extends JPanel implements Runnable {
                 hero.update();
                 ground.update();
                 cloud.update();
+                zombieOne.update();
+                if(zombieOne.getBounds().intersects(hero.getHeroBounds())) {
+                    System.out.println("Collision detected");
+                }
                 // repaint(); zrobione w ten sposob nie wyswietla tla z Window, pewnie dlatego, ze metoda paint z game caly czas to zaslania
                 Thread.sleep(20);
             } catch (InterruptedException e) {
