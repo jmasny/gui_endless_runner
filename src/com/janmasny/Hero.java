@@ -11,6 +11,7 @@ public class Hero {
     private float speedY = 0;
     private Animation heroRun;
     private Rectangle heroBounds;
+    private boolean alive = true;
 
     public Hero() {
         heroRun = new Animation(100);
@@ -38,7 +39,7 @@ public class Hero {
     }
 
     public void jump() {
-        this.speedY += -3;
+        this.speedY += -8;
         this.y += (int) this.speedY;
     }
 
@@ -74,5 +75,13 @@ public class Hero {
 
     public void setSpeedY(float speedY) {
         this.speedY = speedY;
+    }
+
+    public boolean getAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }

@@ -11,10 +11,12 @@ public class Obstacles {
     private Random random;
     private Animation zombieAnimationOne;
     private Animation zombieAnimationTwo;
+    private Hero hero;
     private Zombie zombieOne;
     private Zombie zombieTwo;
 
-    public Obstacles() {
+    public Obstacles(Hero hero) {
+        this.hero = hero;
         obstacleList = new ArrayList<Obstacle>();
         this.zombieOne = new Zombie("resources/zombie_one/", 400);
         this.zombieTwo = new Zombie("resources/zombie_two/", 600);
@@ -36,6 +38,9 @@ public class Obstacles {
     public void update() {
         for (Obstacle obstacle: obstacleList) {
             obstacle.update();
+            if(obstacle.getBounds().intersects(hero.getHeroBounds())) {
+                hero.setAlive(false);
+            }
         }
         Obstacle firstObstacle = obstacleList.get(0);
         if(obstacleList.get(0).isOutOfScreen()) {

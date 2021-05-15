@@ -44,6 +44,16 @@ public class Window extends JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_SPACE:
+                        if(game.getGameState() == Game.GAME_START) {
+                            game.setGameState(Game.GAME_PLAY);
+                        } else if (game.getGameState() == Game.GAME_END) {
+                            game.setGameState(Game.GAME_START);
+                            game.resetGame(); //must be enhanced
+                        }
+                        break;
+                }
                 System.out.println("Key realeased");
             }
         });

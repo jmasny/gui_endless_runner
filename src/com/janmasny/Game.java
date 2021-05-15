@@ -2,9 +2,13 @@ package com.janmasny;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Game extends JPanel implements Runnable {
-    public static final float GRAVITY = 0.11f;
+    public static final int GAME_START = 0;
+    public static final int GAME_PLAY = 1;
+    public static final int GAME_END = 2;
+    public static final float GRAVITY = 0.31f;
     public static final float FLOOR = 300;
     private int x = 0;
     private int y = (int) FLOOR;
@@ -15,6 +19,8 @@ public class Game extends JPanel implements Runnable {
     private Cloud cloud;
     //private Zombie zombieOne;
     private Obstacles obstacles;
+    private int gameState = GAME_START;
+    private BufferedImage gameOverImage;
 
     public Game(){
         this.thread = new Thread(this);
@@ -23,12 +29,33 @@ public class Game extends JPanel implements Runnable {
         this.ground = new Ground(this);
         this.cloud = new Cloud();
        // this.zombieOne = new Zombie();
-        this.obstacles = new Obstacles();
+        this.obstacles = new Obstacles(hero);
+        this.gameOverImage = Resource.getResourceImage("resources/game_over.png");
     }
 
     public void jumpSpeedY() {
         this.speedY += -3;
         this.y += (int) this.speedY;
+    }
+
+    public void update() {
+        switch(gameState) {
+            case GAME_PLAY:
+                hero.update();
+                ground.update();
+                cloud.update();
+                obstacles.update();
+                if(!hero.getAlive()) {
+                    gameState = GAME_END;
+                }
+                break;
+        }
+    }
+
+    public void resetGame() { //must be enhanced
+        hero.setX(0);
+        hero.setY(0);
+        hero.setAlive(true);
     }
 
     public void startGame() {
@@ -42,10 +69,25 @@ public class Game extends JPanel implements Runnable {
         g.setColor(Color.GREEN);
         g.drawLine(0, (int) FLOOR, this.getWidth(), (int) FLOOR);
         //zombieOne.draw(g);
-        obstacles.draw(g);
-        ground.draw(g);
-        cloud.draw(g); //kolejnosc rysowania ma znaczenie dla warst
-        hero.draw(g);
+        switch (gameState) {
+            case GAME_START:
+                hero.draw(g);
+                break;
+            case GAME_PLAY:
+                obstacles.draw(g);
+                ground.draw(g);
+                cloud.draw(g); //kolejnosc rysowania ma znaczenie dla warst
+                hero.draw(g);
+                break;
+            case GAME_END:
+                obstacles.draw(g);
+                ground.draw(g);
+                cloud.draw(g); //kolejnosc rysowania ma znaczenie dla warst
+                hero.draw(g);
+                g.drawImage(gameOverImage, ((this.getWidth()-gameOverImage.getWidth())/2),((this.getHeight()-gameOverImage.getHeight())/2),null);
+                break;
+        }
+
     }
 
     @Override
@@ -60,10 +102,7 @@ public class Game extends JPanel implements Runnable {
 //                y+=speedY;
 //            }
             try {
-                hero.update();
-                ground.update();
-                cloud.update();
-                obstacles.update();
+                this.update();
                 //zombieOne.update();
                 //if(zombieOne.getBounds().intersects(hero.getHeroBounds())) {
                  //   System.out.println("Collision detected");
@@ -78,5 +117,13 @@ public class Game extends JPanel implements Runnable {
 
     public Hero getHero() {
         return hero;
+    }
+
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
     }
 }
