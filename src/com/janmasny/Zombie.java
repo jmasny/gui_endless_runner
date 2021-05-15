@@ -10,13 +10,24 @@ public class Zombie extends Obstacle {
     private Rectangle zombieBounds;
 
     public Zombie(){
-        this.x = 500;
+        this.x = 800;
         this.y = 200;
         this.zombieWalk = new Animation(500);
         this.zombieWalk.addFrame(Resource.getResourceImage("resources/zombie_one/walk_one.png"));
         this.zombieWalk.addFrame(Resource.getResourceImage("resources/zombie_one/walk_two.png"));
         this.zombieWalk.addFrame(Resource.getResourceImage("resources/zombie_one/walk_three.png"));
         this.zombieWalk.addFrame(Resource.getResourceImage("resources/zombie_one/walk_four.png"));
+        this.zombieBounds = new Rectangle();
+    }
+
+    public Zombie(String path, int animationDelay){
+        this.x = 800;
+        this.y = 200;
+        this.zombieWalk = new Animation(animationDelay);
+        this.zombieWalk.addFrame(Resource.getResourceImage(path + "walk_one.png"));
+        this.zombieWalk.addFrame(Resource.getResourceImage(path + "walk_two.png"));
+        this.zombieWalk.addFrame(Resource.getResourceImage(path + "walk_three.png"));
+        this.zombieWalk.addFrame(Resource.getResourceImage(path + "walk_four.png"));
         this.zombieBounds = new Rectangle();
     }
 
@@ -44,7 +55,7 @@ public class Zombie extends Obstacle {
 
     @Override
     public boolean isOutOfScreen() {
-        if(x - zombieWalk.getFrame().getWidth() < 0) {
+        if(x + zombieWalk.getFrame().getWidth() < 0) {
             return true;
         }
         return false;
@@ -60,5 +71,9 @@ public class Zombie extends Obstacle {
 
     public void setZombieWalk(Animation zombieWalk) {
         this.zombieWalk = zombieWalk;
+    }
+
+    public Animation getZombieWalk() {
+        return zombieWalk;
     }
 }
