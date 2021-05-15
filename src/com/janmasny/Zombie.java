@@ -44,6 +44,21 @@ public class Zombie extends Obstacle {
 
     @Override
     public boolean isOutOfScreen() {
+        if(x - zombieWalk.getFrame().getWidth() < 0) {
+            return true;
+        }
         return false;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setZombieWalk(Animation zombieWalk) {
+        this.zombieWalk = zombieWalk;
     }
 }

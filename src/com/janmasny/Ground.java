@@ -27,7 +27,7 @@ public class Ground {
         for (int i = 0; i < groundCount; i++) {
             GroundImage groundImage = new GroundImage();
             groundImage.x = i * groundImageOne.getWidth();
-            groundImage.image = getGroundImage();
+            groundImage.image = getRandomGroundImage();
             listImage.add(groundImage);
         }
     }
@@ -44,7 +44,7 @@ public class Ground {
         }
     }
 
-    private BufferedImage getGroundImage() {
+    private BufferedImage getRandomGroundImage() {
         int x = random.nextInt(3);
         switch(x) {
             case 0:
