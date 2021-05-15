@@ -34,7 +34,7 @@ public class Ground {
 
     public void update() {
         for (GroundImage groundImage:listImage) {
-            groundImage.x --;
+            groundImage.x += -3;
         }
         GroundImage firstGroundImage = listImage.get(0);
         if(listImage.get(0).x + groundImageOne.getWidth() < 0) {

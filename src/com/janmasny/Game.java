@@ -14,12 +14,14 @@ public class Game extends JPanel implements Runnable {
     private Thread thread;
     private Hero hero;
     private Ground ground;
+    private Cloud cloud;
 
     public Game(){
         this.thread = new Thread(this);
         this.hero = new Hero();
         this.hero.setX(100);
         this.ground = new Ground(this);
+        this.cloud = new Cloud();
     }
 
     public void jumpSpeedY() {
@@ -38,8 +40,8 @@ public class Game extends JPanel implements Runnable {
         g.setColor(Color.GREEN);
         g.drawLine(0, (int) FLOOR, this.getWidth(), (int) FLOOR);
         ground.draw(g);
+        cloud.draw(g); //kolejnosc rysowania ma znaczenie dla warst
         hero.draw(g);
-
     }
 
     @Override
@@ -56,6 +58,7 @@ public class Game extends JPanel implements Runnable {
             try {
                 hero.update();
                 ground.update();
+                cloud.update();
                 // repaint(); zrobione w ten sposob nie wyswietla tla z Window, pewnie dlatego, ze metoda paint z game caly czas to zaslania
                 Thread.sleep(20);
             } catch (InterruptedException e) {
