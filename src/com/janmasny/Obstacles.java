@@ -49,6 +49,11 @@ public class Obstacles {
         }
     }
 
+    public void reset() {
+        obstacleList.clear();
+        obstacleList.add(getRandomZombie());
+    }
+
     public void draw(Graphics g) {
         for (Obstacle obstacle: obstacleList) {
             obstacle.draw(g);

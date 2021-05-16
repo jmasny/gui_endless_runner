@@ -35,7 +35,7 @@ public class Zombie extends Obstacle {
 
     @Override
     public void update() {
-        this.x += -3;
+        this.x += -5;
         this.zombieWalk.update();
         this.zombieBounds.x = x;
         this.zombieBounds.y = y;

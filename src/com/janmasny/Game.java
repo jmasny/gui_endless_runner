@@ -1,6 +1,8 @@
 package com.janmasny;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -23,11 +25,14 @@ public class Game extends JPanel implements Runnable {
     private BufferedImage gameOverImage;
     private float score = 0;
     private float highestScore = 0;
+    private Clip backgroundMusic;
+    private Clip deathSound;
 
     public Game(){
         this.thread = new Thread(this);
         this.hero = new Hero();
-        this.hero.setX(100);
+        this.hero.setX(0);
+        this.hero.setY(200);
         this.ground = new Ground(this);
         this.cloud = new Cloud();
        // this.zombieOne = new Zombie();
@@ -61,8 +66,11 @@ public class Game extends JPanel implements Runnable {
 
     public void resetGame() { //must be enhanced
         hero.setX(0);
-        hero.setY(0);
+        hero.setY(200);
         hero.setAlive(true);
+        hero.setOnGround(true);
+        score = 0;
+        obstacles.reset();
     }
 
     public void startGame() {

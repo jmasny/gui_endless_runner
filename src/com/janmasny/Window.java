@@ -39,7 +39,9 @@ public class Window extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.println("Key pressed");
-                game.getHero().jump();
+                if (game.getHero().isOnGround()) {
+                    game.getHero().jump();
+                }
             }
 
             @Override
@@ -48,9 +50,10 @@ public class Window extends JFrame {
                     case KeyEvent.VK_SPACE:
                         if(game.getGameState() == Game.GAME_START) {
                             game.setGameState(Game.GAME_PLAY);
-                        } else if (game.getGameState() == Game.GAME_END) {
-                            game.setGameState(Game.GAME_START);
-                            game.resetGame(); //must be enhanced
+                        }
+                        else if (game.getGameState() == Game.GAME_END) {
+                            game.resetGame();
+                            game.setGameState(Game.GAME_PLAY);
                         }
                         break;
                 }
