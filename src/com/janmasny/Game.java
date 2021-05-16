@@ -21,6 +21,8 @@ public class Game extends JPanel implements Runnable {
     private Obstacles obstacles;
     private int gameState = GAME_START;
     private BufferedImage gameOverImage;
+    private float score = 0;
+    private float highestScore = 0;
 
     public Game(){
         this.thread = new Thread(this);
@@ -48,8 +50,13 @@ public class Game extends JPanel implements Runnable {
                 if(!hero.getAlive()) {
                     gameState = GAME_END;
                 }
+                this.score += 0.05;
                 break;
         }
+    }
+
+    public void addScore(int score) {
+        this.score += score;
     }
 
     public void resetGame() { //must be enhanced
@@ -65,7 +72,7 @@ public class Game extends JPanel implements Runnable {
     public void paint(Graphics g) {
         super.paint(g);
         g.setColor(Color.BLUE);
-        g.fillRect(x, y, 100, 100);
+        g.fillRect(x, y, 50, 50);
         g.setColor(Color.GREEN);
         g.drawLine(0, (int) FLOOR, this.getWidth(), (int) FLOOR);
         //zombieOne.draw(g);
@@ -78,6 +85,9 @@ public class Game extends JPanel implements Runnable {
                 ground.draw(g);
                 cloud.draw(g); //kolejnosc rysowania ma znaczenie dla warst
                 hero.draw(g);
+                g.setColor(Color.BLACK);
+                g.drawString("SCORE: " + (int) score, 700, 20);
+                g.drawString("HIGHEST: " + (int) highestScore, 700, 40);
                 break;
             case GAME_END:
                 obstacles.draw(g);

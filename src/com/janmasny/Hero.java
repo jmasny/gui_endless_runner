@@ -34,8 +34,8 @@ public class Hero {
         }
         heroBounds.x = x;
         heroBounds.y = y;
-        heroBounds.width = heroRun.getFrame().getWidth();
-        heroBounds.height = heroRun.getFrame().getHeight();
+        heroBounds.width = (heroRun.getFrame().getWidth());
+        heroBounds.height = (heroRun.getFrame().getHeight());
     }
 
     public void jump() {
@@ -45,7 +45,7 @@ public class Hero {
 
     public void draw(Graphics g) {
         g.setColor(Color.RED);
-        g.drawRect(x, y, heroRun.getFrame().getWidth(), heroRun.getFrame().getHeight());
+        g.drawRect(heroBounds.x, heroBounds.y, heroBounds.width, heroBounds.height);
         g.drawImage(heroRun.getFrame(), x, y, null);
     }
 

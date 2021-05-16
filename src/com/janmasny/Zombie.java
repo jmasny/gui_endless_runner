@@ -8,8 +8,9 @@ public class Zombie extends Obstacle {
     private int y;
     private Animation zombieWalk;
     private Rectangle zombieBounds;
+    private Hero hero;
 
-    public Zombie(){
+    public Zombie(Hero hero){
         this.x = 800;
         this.y = 200;
         this.zombieWalk = new Animation(500);
@@ -18,6 +19,7 @@ public class Zombie extends Obstacle {
         this.zombieWalk.addFrame(Resource.getResourceImage("resources/zombie_one/walk_three.png"));
         this.zombieWalk.addFrame(Resource.getResourceImage("resources/zombie_one/walk_four.png"));
         this.zombieBounds = new Rectangle();
+        this.hero = hero;
     }
 
     public Zombie(String path, int animationDelay){
@@ -59,6 +61,10 @@ public class Zombie extends Obstacle {
             return true;
         }
         return false;
+    }
+
+    public int getX() {
+        return x;
     }
 
     public void setX(int x) {

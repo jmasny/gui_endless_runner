@@ -57,7 +57,7 @@ public class Obstacles {
 
     private Zombie getRandomZombie() {
 
-        Zombie zombie = new Zombie();
+        Zombie zombie = new Zombie(hero);
         zombie.setX(800);
         int i = random.nextInt(2);
         switch (i) {
