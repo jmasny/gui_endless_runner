@@ -8,30 +8,19 @@ import java.util.Random;
 public class Obstacles {
 
     private List<Obstacle> obstacleList;
-    private Random random;
-    private Animation zombieAnimationOne;
-    private Animation zombieAnimationTwo;
     private Hero hero;
     private Zombie zombieOne;
     private Zombie zombieTwo;
+    private Zombie zombieThree;
+    private Random random;
 
     public Obstacles(Hero hero) {
+        this.random = new Random();
         this.hero = hero;
         obstacleList = new ArrayList<Obstacle>();
-        this.zombieOne = new Zombie("resources/zombie_one/", 400);
-        this.zombieTwo = new Zombie("resources/zombie_two/", 600);
-
-//        this.zombieAnimationOne = new Animation(500);
-//        this.zombieAnimationOne.addFrame(Resource.getResourceImage("resources/zombie_one/walk_one.png"));
-//        this.zombieAnimationOne.addFrame(Resource.getResourceImage("resources/zombie_one/walk_two.png"));
-//        this.zombieAnimationOne.addFrame(Resource.getResourceImage("resources/zombie_one/walk_three.png"));
-//        this.zombieAnimationOne.addFrame(Resource.getResourceImage("resources/zombie_one/walk_four.png"));
-//        this.zombieAnimationTwo = new Animation(300);
-//        this.zombieAnimationTwo.addFrame(Resource.getResourceImage("resources/zombie_two/walk_one.png"));
-//        this.zombieAnimationTwo.addFrame(Resource.getResourceImage("resources/zombie_two/walk_two.png"));
-//        this.zombieAnimationTwo.addFrame(Resource.getResourceImage("resources/zombie_two/walk_three.png"));
-//        this.zombieAnimationTwo.addFrame(Resource.getResourceImage("resources/zombie_two/walk_four.png"));
-        random = new Random();
+        this.zombieOne = new Zombie("resources/zombies/one/", 400);
+        this.zombieTwo = new Zombie("resources/zombies/two/", 600);
+        this.zombieThree = new Zombie("resources/zombies/three/", 250);
         obstacleList.add(getRandomZombie());
     }
 
@@ -42,9 +31,8 @@ public class Obstacles {
                 hero.setAlive(false);
             }
         }
-        Obstacle firstObstacle = obstacleList.get(0);
         if(obstacleList.get(0).isOutOfScreen()) {
-            obstacleList.remove(firstObstacle);
+            obstacleList.remove(obstacleList.get(0));
             obstacleList.add(getRandomZombie());
         }
     }
@@ -63,16 +51,18 @@ public class Obstacles {
     private Zombie getRandomZombie() {
 
         Zombie zombie = new Zombie(hero);
-        zombie.setX(800);
-        int i = random.nextInt(2);
+        int span = random.nextInt(150);
+        zombie.setX(544+span);
+        int i = random.nextInt(3);
         switch (i) {
             case 0:
-                // works also with | return new Zombie("resources/zombie_one/", 400);
-                // but doesn't work properly with | return zombieOne
                 zombie.setZombieWalk(zombieOne.getZombieWalk());
                 break;
             case 1:
                 zombie.setZombieWalk(zombieTwo.getZombieWalk());
+                break;
+            case 2:
+                zombie.setZombieWalk(zombieThree.getZombieWalk());
                 break;
         }
         return zombie;

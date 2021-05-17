@@ -14,10 +14,10 @@ public class Zombie extends Obstacle {
         this.x = 800;
         this.y = 200;
         this.zombieWalk = new Animation(500);
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombie_one/walk_one.png"));
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombie_one/walk_two.png"));
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombie_one/walk_three.png"));
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombie_one/walk_four.png"));
+        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_one.png"));
+        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_two.png"));
+        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_three.png"));
+        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_four.png"));
         this.zombieBounds = new Rectangle();
         this.hero = hero;
     }
