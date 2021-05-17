@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Ground {
 
-    public static final int GROUND_LEVEL = 235;
+    public static final int GROUND_LEVEL = (int) Game.FLOOR - 60;
     private List<GroundImage> listImage;
     private BufferedImage groundImageOne;
     private BufferedImage groundImageTwo;

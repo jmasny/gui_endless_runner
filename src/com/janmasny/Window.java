@@ -16,13 +16,13 @@ public class Window extends JFrame {
 
     public Window() {
         super();
-        this.setTitle("Endless runner");
+        this.setTitle("Zombie endless runner");
         this.setSize(544, 320);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.initComponents();
         this.setVisible(true);
 
-        // one bug, background not showing, only game class paint
         (new Timer(0, (ActionEvent a) -> {
             this.game.repaint();
         })).start();
@@ -38,26 +38,26 @@ public class Window extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println("Key pressed");
-                if (game.getHero().isOnGround()) {
-                    game.getHero().jump();
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_SPACE:
                         if(game.getGameState() == Game.GAME_START) {
                             game.setGameState(Game.GAME_PLAY);
-                        }
-                        else if (game.getGameState() == Game.GAME_END) {
+                        } else if (game.getGameState() == Game.GAME_PLAY) {
+                            if (game.getHero().isOnGround()) {
+                                game.getHero().jump();
+                            }
+                        } else if (game.getGameState() == Game.GAME_END) {
                             game.resetGame();
                             game.setGameState(Game.GAME_PLAY);
                         }
                         break;
                 }
-                System.out.println("Key realeased");
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
             }
         });
 
@@ -69,15 +69,4 @@ public class Window extends JFrame {
         game.startGame();
     }
 
-    public void paint(Graphics g) {
-        super.paint(g); //bez tego nie wyswietla mi klasy Game, rowniez wyswietla background ponownie
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new File("resources/obstacle1.png"));
-            g.drawImage(image, 200, 200, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        g.fillOval(600,600,50,50);
-    }
 }
