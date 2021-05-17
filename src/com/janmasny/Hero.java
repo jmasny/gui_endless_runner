@@ -8,42 +8,36 @@ import static com.janmasny.Game.FLOOR;
 import static com.janmasny.Game.GRAVITY;
 
 public class Hero {
+
+    private Animation heroRunAnimation;
+    private BufferedImage heroDeadImage;
+    private Clip jumpSound;
+    private Rectangle heroBounds;
     private int x = 0;
     private int y = 0;
     private float speedY = 0;
-    private BufferedImage heroDead;
-    private Animation heroRun;
-    private Rectangle heroBounds;
-    private boolean alive = true;
-    private Clip jumpSound;
+    private boolean alive;
     private boolean onGround;
 
-    public boolean isOnGround() {
-        return onGround;
-    }
-
-    public void setOnGround(boolean onGround) {
-        this.onGround = onGround;
-    }
-
     public Hero() {
-        heroRun = new Animation(100);
-        heroRun.addFrame(Loader.loadImage("resources/walk_one.png"));
-        heroRun.addFrame(Loader.loadImage("resources/walk_two.png"));
-        heroRun.addFrame(Loader.loadImage("resources/walk_three.png"));
-        heroRun.addFrame(Loader.loadImage("resources/walk_four.png"));
-        heroDead = Loader.loadImage("resources/dead.png");
-        this.heroBounds = new Rectangle();
+        heroRunAnimation = new Animation(100);
+        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_one.png"));
+        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_two.png"));
+        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_three.png"));
+        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_four.png"));
+        heroDeadImage = Loader.loadImage("resources/dead.png");
         this.jumpSound = Loader.loadClip("resources/music/jump.wav");
+        this.heroBounds = new Rectangle();
+        this.alive = true;
         this.onGround = true;
     }
 
     public void update() {
-        heroRun.update();
-        // this is made for jumping
-        if ( y >= FLOOR - heroRun.getFrame().getHeight()) {
+        heroRunAnimation.update();
+        // floor and jumping logic
+        if ( y >= FLOOR - heroRunAnimation.getFrame().getHeight()) {
             speedY = 0;
-            y = (int) FLOOR - heroRun.getFrame().getHeight(); //rectangle width
+            y = (int) FLOOR - heroRunAnimation.getFrame().getHeight();
             onGround = true;
         } else {
             speedY+=GRAVITY;
@@ -51,15 +45,15 @@ public class Hero {
         }
         heroBounds.x = x;
         heroBounds.y = y;
-        heroBounds.width = (heroRun.getFrame().getWidth());
-        heroBounds.height = (heroRun.getFrame().getHeight());
+        heroBounds.width = (heroRunAnimation.getFrame().getWidth());
+        heroBounds.height = (heroRunAnimation.getFrame().getHeight());
     }
 
     public void jump() {
-        jumpSound.flush();
+        jumpSound.flush(); //bugged
         this.speedY += -12;
         this.y += (int) this.speedY;
-        jumpSound.start();
+        jumpSound.start(); //bugged
         onGround = false;
     }
 
@@ -67,9 +61,9 @@ public class Hero {
         if (alive) {
             g.setColor(Color.RED);
             g.drawRect(heroBounds.x, heroBounds.y, heroBounds.width, heroBounds.height);
-            g.drawImage(heroRun.getFrame(), x, y, null);
+            g.drawImage(heroRunAnimation.getFrame(), x, y, null);
         } else {
-            g.drawImage(heroDead, x, y, null);
+            g.drawImage(heroDeadImage, x, y, null);
         }
     }
 
@@ -77,28 +71,16 @@ public class Hero {
         return heroBounds;
     }
 
-    public float getX() {
-        return x;
-    }
+    public boolean getOnGround() { return onGround; }
+
+    public void setOnGround(boolean onGround) { this.onGround = onGround; }
 
     public void setX(int x) {
         this.x = x;
     }
 
-    public float getY() {
-        return y;
-    }
-
     public void setY(int y) {
         this.y = y;
-    }
-
-    public float getSpeedY() {
-        return speedY;
-    }
-
-    public void setSpeedY(float speedY) {
-        this.speedY = speedY;
     }
 
     public boolean getAlive() {

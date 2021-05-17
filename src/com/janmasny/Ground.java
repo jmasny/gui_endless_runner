@@ -16,7 +16,7 @@ public class Ground {
     private BufferedImage groundImageThree;
     private Random random;
 
-    public Ground(Game game) {
+    public Ground() {
         this.groundImageOne = Loader.loadImage("resources/ground_one.png");
         this.groundImageTwo = Loader.loadImage("resources/ground_two.png");
         this.groundImageThree = Loader.loadImage("resources/ground_three.png");

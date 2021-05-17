@@ -43,7 +43,7 @@ public class Window extends JFrame {
                         if(game.getGameState() == Game.GAME_START) {
                             game.setGameState(Game.GAME_PLAY);
                         } else if (game.getGameState() == Game.GAME_PLAY) {
-                            if (game.getHero().isOnGround()) {
+                            if (game.getHero().getOnGround()) {
                                 game.getHero().jump();
                             }
                         } else if (game.getGameState() == Game.GAME_END) {

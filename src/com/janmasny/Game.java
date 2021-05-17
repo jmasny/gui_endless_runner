@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Game extends JPanel implements Runnable {
+
     public static final int GAME_START = 0;
     public static final int GAME_PLAY = 1;
     public static final int GAME_END = 2;
@@ -17,11 +18,10 @@ public class Game extends JPanel implements Runnable {
     private Clip deathSound;
     private Thread thread;
     private Hero hero;
+    private Background background;
     private Ground ground;
     private Cloud cloud;
     private Obstacles obstacles;
-    private int x = 0;
-    private int y = (int) FLOOR;
     private float speedY = 0;
     private int gameState = GAME_START;
     private float score = 0;
@@ -33,7 +33,8 @@ public class Game extends JPanel implements Runnable {
         this.hero = new Hero();
         this.hero.setX(0);
         this.hero.setY(200);
-        this.ground = new Ground(this);
+        this.background = new Background();
+        this.ground = new Ground();
         this.cloud = new Cloud();
         this.obstacles = new Obstacles(hero);
         this.gameOverImage = Loader.loadImage("resources/game_over.png");
@@ -56,9 +57,10 @@ public class Game extends JPanel implements Runnable {
     public void update() {
         switch(gameState) {
             case GAME_PLAY:
-                hero.update();
-                ground.update();
+                background.update();
                 cloud.update();
+                ground.update();
+                hero.update();
                 obstacles.update();
                 if(!hero.getAlive()) {
                     gameState = GAME_END;
@@ -87,23 +89,26 @@ public class Game extends JPanel implements Runnable {
         g.drawLine(0, (int) FLOOR, this.getWidth(), (int) FLOOR);
         switch (gameState) {
             case GAME_START:
-                hero.draw(g);
+                background.draw(g);
                 ground.draw(g);
+                hero.draw(g);
                 break;
             case GAME_PLAY:
-                obstacles.draw(g);
+                background.draw(g);
                 ground.draw(g);
                 cloud.draw(g);
                 hero.draw(g);
-                g.setColor(Color.ORANGE);
+                obstacles.draw(g);
+                g.setColor(Color.WHITE);
                 g.drawString("SCORE: " + (int) score, getWidth()-80, 20);
                 g.drawString("HIGHEST: " + (int) highestScore, getWidth()-80, 40);
                 break;
             case GAME_END:
-                obstacles.draw(g);
+                background.draw(g);
                 ground.draw(g);
                 cloud.draw(g);
                 hero.draw(g);
+                obstacles.draw(g);
                 g.drawImage(gameOverImage, ((this.getWidth()-gameOverImage.getWidth())/2),((this.getHeight()-gameOverImage.getHeight())/2),null);
                 break;
         }
