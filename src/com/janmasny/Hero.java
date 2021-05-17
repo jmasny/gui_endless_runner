@@ -21,11 +21,11 @@ public class Hero {
 
     public Hero() {
         heroRunAnimation = new Animation(100);
-        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_one.png"));
-        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_two.png"));
-        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_three.png"));
-        heroRunAnimation.addFrame(Loader.loadImage("resources/walk_four.png"));
-        heroDeadImage = Loader.loadImage("resources/dead.png");
+        heroRunAnimation.addFrame(Loader.loadImage("resources/hero/walk_one.png"));
+        heroRunAnimation.addFrame(Loader.loadImage("resources/hero/walk_two.png"));
+        heroRunAnimation.addFrame(Loader.loadImage("resources/hero/walk_three.png"));
+        heroRunAnimation.addFrame(Loader.loadImage("resources/hero/walk_four.png"));
+        heroDeadImage = Loader.loadImage("resources/hero/dead.png");
         this.jumpSound = Loader.loadClip("resources/music/jump.wav");
         this.heroBounds = new Rectangle();
         this.alive = true;

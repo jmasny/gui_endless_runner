@@ -15,13 +15,12 @@ public class Game extends JPanel implements Runnable {
     private BufferedImage titleImage;
     private BufferedImage startImage;
     private BufferedImage gameOverImage;
-    private BufferedImage backgroundImage;
+    private BufferedImage endImage;
     private Clip backgroundMusic;
     private Clip deathSound;
     private Thread thread;
     private Hero hero;
     private Background background;
-    private Ground ground;
     private Obstacles obstacles;
     private float speedY = 0;
     private int gameState = GAME_START;
@@ -35,12 +34,11 @@ public class Game extends JPanel implements Runnable {
         this.hero.setX(0);
         this.hero.setY(200);
         this.background = new Background();
-        this.ground = new Ground();
         this.obstacles = new Obstacles(hero);
         this.titleImage = Loader.loadImage("resources/start/zombie_endless_runner.png");
         this.startImage = Loader.loadImage("resources/start/space_play.png");
-        this.gameOverImage = Loader.loadImage("resources/game_over.png");
-        this.backgroundImage = Loader.loadImage("resources/background/back.png");
+        this.gameOverImage = Loader.loadImage("resources/end/gameover.png");
+        this.endImage = Loader.loadImage("resources/end/play_again.png");
     }
 
     public void startGame() {
@@ -60,7 +58,6 @@ public class Game extends JPanel implements Runnable {
         switch(gameState) {
             case GAME_PLAY:
                 background.update();
-                ground.update();
                 hero.update();
                 obstacles.update();
                 if(!hero.getAlive()) {
@@ -85,20 +82,15 @@ public class Game extends JPanel implements Runnable {
 
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(backgroundImage, 0,0,null);
-        g.setColor(Color.GREEN);
-        g.drawLine(0, (int) FLOOR, this.getWidth(), (int) FLOOR);
         switch (gameState) {
             case GAME_START:
                 background.draw(g);
-                ground.draw(g);
                 hero.draw(g);
                 g.drawImage(titleImage, ((this.getWidth()-titleImage.getWidth())/2),((this.getHeight()-titleImage.getHeight())/2)-40,null );
                 g.drawImage(startImage, ((this.getWidth()-startImage.getWidth())/2),((this.getHeight()-startImage.getHeight())/2),null );
                 break;
             case GAME_PLAY:
                 background.draw(g);
-                ground.draw(g);
                 hero.draw(g);
                 obstacles.draw(g);
                 g.setColor(Color.WHITE);
@@ -107,10 +99,10 @@ public class Game extends JPanel implements Runnable {
                 break;
             case GAME_END:
                 background.draw(g);
-                ground.draw(g);
                 hero.draw(g);
                 obstacles.draw(g);
-                g.drawImage(gameOverImage, ((this.getWidth()-gameOverImage.getWidth())/2),((this.getHeight()-gameOverImage.getHeight())/2),null);
+                g.drawImage(gameOverImage, ((this.getWidth()-gameOverImage.getWidth())/2),((this.getHeight()-gameOverImage.getHeight())/2)-40,null );
+                g.drawImage(endImage, ((this.getWidth()-endImage.getWidth())/2),((this.getHeight()-endImage.getHeight())/2),null );
                 break;
         }
 

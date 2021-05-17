@@ -11,37 +11,50 @@ public class Background {
     private List<BackgroundImage> fogImageList;
     private List<BackgroundImage> fronttreesImageList;
     private List<BackgroundImage> fartreesImageList;
+    private List<BackgroundImage> groundImageList;
+    private BufferedImage backgroundImage;
     private BufferedImage fenceImage;
     private BufferedImage fogImage;
     private BufferedImage fronttreesImage;
     private BufferedImage fartreesImage;
+    private BufferedImage groundImage;
 
     public Background() {
         this.fenceImageList = new ArrayList<BackgroundImage>();
         this.fogImageList = new ArrayList<BackgroundImage>();
         this.fronttreesImageList = new ArrayList<BackgroundImage>();
         this.fartreesImageList = new ArrayList<BackgroundImage>();
+        this.groundImageList = new ArrayList<BackgroundImage>();
+        this.backgroundImage = Loader.loadImage("resources/background/back.png");
         this.fenceImage = Loader.loadImage("resources/background/fence.png");
         this.fogImage = Loader.loadImage("resources/background/fog.png");
         this.fronttreesImage = Loader.loadImage("resources/background/fronttrees.png");
         this.fartreesImage = Loader.loadImage("resources/background/fartrees.png");
+        this.groundImage = Loader.loadImage("resources/background/ground.png");
         for (int i = 0; i < 2; i++) {
             BackgroundImage fenceBackgroundImage = new BackgroundImage();
             BackgroundImage fogBackgroundImage = new BackgroundImage();
             BackgroundImage fronttreesBackgroundImage = new BackgroundImage();
             BackgroundImage fartreesBackgroundImage = new BackgroundImage();
+            BackgroundImage groundBackgroundImage = new BackgroundImage();
+
             fenceBackgroundImage.x = i * fenceImage.getWidth();
             fogBackgroundImage.x = i * fogImage.getWidth();
             fronttreesBackgroundImage.x = i * fronttreesImage.getWidth();
             fartreesBackgroundImage.x = i * fartreesImage.getWidth();
+            groundBackgroundImage.x = i * groundImage.getWidth();
+
             fenceBackgroundImage.image = fenceImage;
             fogBackgroundImage.image = fogImage;
             fronttreesBackgroundImage.image = fronttreesImage;
             fartreesBackgroundImage.image = fartreesImage;
+            groundBackgroundImage.image = groundImage;
+
             fenceImageList.add(fenceBackgroundImage);
             fogImageList.add(fogBackgroundImage);
             fronttreesImageList.add(fronttreesBackgroundImage);
             fartreesImageList.add(fartreesBackgroundImage);
+            groundImageList.add(groundBackgroundImage);
         }
     }
 
@@ -50,6 +63,7 @@ public class Background {
         this.updateImageList(fronttreesImageList, 2);
         this.updateImageList(fogImageList, 3);
         this.updateImageList(fenceImageList, 4);
+        this.updateImageList(groundImageList, 5);
     }
 
     private void updateImageList(List<BackgroundImage> imageList, int speed) {
@@ -64,6 +78,7 @@ public class Background {
     }
 
     public void draw(Graphics g) {
+        g.drawImage(backgroundImage, 0,0,null);
         for (BackgroundImage fartrees:fartreesImageList) {
             g.drawImage(fartrees.image, fartrees.x, 0, null);
         }
@@ -71,10 +86,13 @@ public class Background {
             g.drawImage(fronttrees.image, fronttrees.x, 0, null);
         }
         for (BackgroundImage fog:fogImageList) {
-            g.drawImage(fog.image, fog.x, 150, null);
+            g.drawImage(fog.image, fog.x, 135, null);
         }
         for (BackgroundImage fence:fenceImageList) {
             g.drawImage(fence.image, fence.x, 205, null);
+        }
+        for (BackgroundImage ground:groundImageList) {
+            g.drawImage(ground.image, ground.x, (int) Game.FLOOR - 60, null);
         }
 
     }
