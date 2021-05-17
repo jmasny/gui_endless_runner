@@ -7,9 +7,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Resource {
+public class Loader {
 
-    public static BufferedImage getResourceImage(String path) {
+    public static BufferedImage loadImage(String path) {
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File(path));

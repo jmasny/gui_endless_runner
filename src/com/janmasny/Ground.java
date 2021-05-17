@@ -2,7 +2,6 @@ package com.janmasny;
 
 
 import java.awt.*;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +17,9 @@ public class Ground {
     private Random random;
 
     public Ground(Game game) {
-        this.groundImageOne = Resource.getResourceImage("resources/ground_one.png");
-        this.groundImageTwo = Resource.getResourceImage("resources/ground_two.png");
-        this.groundImageThree = Resource.getResourceImage("resources/ground_three.png");
+        this.groundImageOne = Loader.loadImage("resources/ground_one.png");
+        this.groundImageTwo = Loader.loadImage("resources/ground_two.png");
+        this.groundImageThree = Loader.loadImage("resources/ground_three.png");
         this.listImage = new ArrayList<GroundImage>();
         this.random = new Random();
         int groundCount = 800 / groundImageOne.getWidth() + 2;

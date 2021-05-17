@@ -2,7 +2,6 @@ package com.janmasny;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -37,7 +36,7 @@ public class Game extends JPanel implements Runnable {
         this.cloud = new Cloud();
        // this.zombieOne = new Zombie();
         this.obstacles = new Obstacles(hero);
-        this.gameOverImage = Resource.getResourceImage("resources/game_over.png");
+        this.gameOverImage = Loader.loadImage("resources/game_over.png");
     }
 
     public void jumpSpeedY() {

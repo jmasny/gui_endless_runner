@@ -28,13 +28,13 @@ public class Hero {
 
     public Hero() {
         heroRun = new Animation(100);
-        heroRun.addFrame(Resource.getResourceImage("resources/walk_one.png"));
-        heroRun.addFrame(Resource.getResourceImage("resources/walk_two.png"));
-        heroRun.addFrame(Resource.getResourceImage("resources/walk_three.png"));
-        heroRun.addFrame(Resource.getResourceImage("resources/walk_four.png"));
-        heroDead = Resource.getResourceImage("resources/dead.png");
+        heroRun.addFrame(Loader.loadImage("resources/walk_one.png"));
+        heroRun.addFrame(Loader.loadImage("resources/walk_two.png"));
+        heroRun.addFrame(Loader.loadImage("resources/walk_three.png"));
+        heroRun.addFrame(Loader.loadImage("resources/walk_four.png"));
+        heroDead = Loader.loadImage("resources/dead.png");
         this.heroBounds = new Rectangle();
-        this.jumpSound = Resource.loadClip("resources/music/jump.wav");
+        this.jumpSound = Loader.loadClip("resources/music/jump.wav");
         this.onGround = true;
     }
 

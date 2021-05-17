@@ -11,7 +11,7 @@ public class Cloud {
     private List<CloudImage> clouds;
 
     public Cloud() {
-        this.cloudImage = Resource.getResourceImage("resources/cloud.png");
+        this.cloudImage = Loader.loadImage("resources/cloud.png");
         this.clouds = new ArrayList<CloudImage>();
 
         CloudImage cloudImageOne = new CloudImage();
