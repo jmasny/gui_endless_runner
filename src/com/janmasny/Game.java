@@ -12,6 +12,8 @@ public class Game extends JPanel implements Runnable {
     public static final int GAME_END = 2;
     public static final float GRAVITY = 0.31f;
     public static final float FLOOR = 295;
+    private BufferedImage titleImage;
+    private BufferedImage startImage;
     private BufferedImage gameOverImage;
     private BufferedImage backgroundImage;
     private Clip backgroundMusic;
@@ -20,7 +22,6 @@ public class Game extends JPanel implements Runnable {
     private Hero hero;
     private Background background;
     private Ground ground;
-    private Cloud cloud;
     private Obstacles obstacles;
     private float speedY = 0;
     private int gameState = GAME_START;
@@ -35,10 +36,11 @@ public class Game extends JPanel implements Runnable {
         this.hero.setY(200);
         this.background = new Background();
         this.ground = new Ground();
-        this.cloud = new Cloud();
         this.obstacles = new Obstacles(hero);
+        this.titleImage = Loader.loadImage("resources/start/zombie_endless_runner.png");
+        this.startImage = Loader.loadImage("resources/start/space_play.png");
         this.gameOverImage = Loader.loadImage("resources/game_over.png");
-        this.backgroundImage = Loader.loadImage("resources/background/back-big.png");
+        this.backgroundImage = Loader.loadImage("resources/background/back.png");
     }
 
     public void startGame() {
@@ -58,7 +60,6 @@ public class Game extends JPanel implements Runnable {
         switch(gameState) {
             case GAME_PLAY:
                 background.update();
-                cloud.update();
                 ground.update();
                 hero.update();
                 obstacles.update();
@@ -92,11 +93,12 @@ public class Game extends JPanel implements Runnable {
                 background.draw(g);
                 ground.draw(g);
                 hero.draw(g);
+                g.drawImage(titleImage, ((this.getWidth()-titleImage.getWidth())/2),((this.getHeight()-titleImage.getHeight())/2)-40,null );
+                g.drawImage(startImage, ((this.getWidth()-startImage.getWidth())/2),((this.getHeight()-startImage.getHeight())/2),null );
                 break;
             case GAME_PLAY:
                 background.draw(g);
                 ground.draw(g);
-                cloud.draw(g);
                 hero.draw(g);
                 obstacles.draw(g);
                 g.setColor(Color.WHITE);
@@ -106,7 +108,6 @@ public class Game extends JPanel implements Runnable {
             case GAME_END:
                 background.draw(g);
                 ground.draw(g);
-                cloud.draw(g);
                 hero.draw(g);
                 obstacles.draw(g);
                 g.drawImage(gameOverImage, ((this.getWidth()-gameOverImage.getWidth())/2),((this.getHeight()-gameOverImage.getHeight())/2),null);
