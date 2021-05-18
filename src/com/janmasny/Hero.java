@@ -15,11 +15,13 @@ public class Hero {
     private Rectangle heroBounds;
     private int x;
     private int y;
+    private int detectX;
+    private int detectY;
     private float speedY = 0;
     private boolean alive;
     private boolean onGround;
 
-    public Hero() {
+    public Hero(int detectX, int detectY, int detectWidth, int detectHeight) {
         heroRunAnimation = new Animation(100);
         heroRunAnimation.addFrame(Loader.loadImage("resources/hero/walk_one.png"));
         heroRunAnimation.addFrame(Loader.loadImage("resources/hero/walk_two.png"));
@@ -27,7 +29,9 @@ public class Hero {
         heroRunAnimation.addFrame(Loader.loadImage("resources/hero/walk_four.png"));
         heroDeadImage = Loader.loadImage("resources/hero/dead.png");
         this.jumpSound = Loader.loadClip("resources/music/jump.wav");
-        this.heroBounds = new Rectangle();
+        this.detectX = detectX;
+        this.detectY = detectY;
+        this.heroBounds = new Rectangle(detectWidth, detectHeight);
         this.alive = true;
         this.onGround = true;
     }
@@ -45,10 +49,8 @@ public class Hero {
             speedY+=GRAVITY;
             y+=speedY;
         }
-        heroBounds.x = x;
-        heroBounds.y = y;
-        heroBounds.width = (heroRunAnimation.getFrame().getWidth());
-        heroBounds.height = (heroRunAnimation.getFrame().getHeight());
+        heroBounds.x = x + detectX;
+        heroBounds.y = y + detectY;
     }
 
     public void jump() {
@@ -61,8 +63,8 @@ public class Hero {
 
     public void draw(Graphics g) {
         if (alive) {
-            g.setColor(Color.RED);
-            g.drawRect(heroBounds.x, heroBounds.y, heroBounds.width, heroBounds.height);
+            //g.setColor(Color.RED);
+            //g.drawRect(heroBounds.x, heroBounds.y, heroBounds.width, heroBounds.height);
             g.drawImage(heroRunAnimation.getFrame(), x, y, null);
         } else {
             g.drawImage(heroDeadImage, x, y, null);

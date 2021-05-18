@@ -24,7 +24,7 @@ public class Zombie extends Obstacle {
         this.hero = hero;
     }
 
-    public Zombie(String path, int animationDelay, int detectX, int detectY, int width, int height){
+    public Zombie(String path, int animationDelay, int detectX, int detectY, int detectWidth, int detectHeight){
         this.x = 700;
         this.y = Game.SPRITE_FLOOR;
         this.detectX = detectX;
@@ -34,7 +34,7 @@ public class Zombie extends Obstacle {
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_two.png"));
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_three.png"));
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_four.png"));
-        this.zombieBounds = new Rectangle(width, height);
+        this.zombieBounds = new Rectangle(detectWidth, detectHeight);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class Zombie extends Obstacle {
     @Override
     public void draw(Graphics g) {
         g.drawImage(zombieWalk.getFrame(), x, y, null);
-        g.setColor(Color.BLUE);
-        g.drawRect(zombieBounds.x, zombieBounds.y, zombieBounds.width, zombieBounds.height);
+        //g.setColor(Color.BLUE);
+        //g.drawRect(zombieBounds.x, zombieBounds.y, zombieBounds.width, zombieBounds.height);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Game extends JPanel implements Runnable {
 
     public Game(){
         this.thread = new Thread(this);
-        this.hero = new Hero();
+        this.hero = new Hero(38, 12,22, 80);
         this.hero.setX(0);
         this.hero.setY(SPRITE_FLOOR);
         this.background = new Background();
