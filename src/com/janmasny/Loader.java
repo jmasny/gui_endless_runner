@@ -38,7 +38,7 @@ public class Loader {
             }
             System.out.println(file.getName());
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            String text = reader.readLine().trim();
+            String text = reader.readLine();
             int highestScore = 0;
             if (text != null) {
                 highestScore = Integer.parseInt(text);
@@ -52,5 +52,22 @@ public class Loader {
         }
 
         return -1;
+    }
+
+    public static void saveHighestScore(int highestScore) {
+        File file = null;
+        try {
+            file = new File("resources/results/highest_score.txt");
+            if(file.createNewFile()) {
+                System.out.println(file.getName());
+            }
+            System.out.println(file.getName());
+            FileWriter writer = new FileWriter(file);
+            String toSave = Integer.toString(highestScore);
+            writer.write(toSave);
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

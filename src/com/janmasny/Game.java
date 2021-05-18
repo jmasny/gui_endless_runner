@@ -26,7 +26,7 @@ public class Game extends JPanel implements Runnable {
     private float speedY = 0;
     private int gameState = GAME_START;
     private float score = 0;
-    private float highestScore;
+    private int highestScore;
 
 
     public Game(){
@@ -64,6 +64,10 @@ public class Game extends JPanel implements Runnable {
                 obstacles.update();
                 if(!hero.getAlive()) {
                     gameState = GAME_END;
+                    if (score > highestScore) {
+                        highestScore = (int) score;
+                        Loader.saveHighestScore(highestScore);
+                    }
                 }
                 this.score += 0.05;
                 break;
