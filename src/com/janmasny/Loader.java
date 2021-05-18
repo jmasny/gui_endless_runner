@@ -4,8 +4,7 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class Loader {
 
@@ -28,5 +27,30 @@ public class Loader {
             e.printStackTrace();
         }
         return sound;
+    }
+
+    public static int loadHighestScore() {
+        File file = null;
+        try {
+            file = new File("resources/results/highest_score.txt");
+            if(file.createNewFile()) {
+                System.out.println(file.getName());
+            }
+            System.out.println(file.getName());
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String text = reader.readLine().trim();
+            int highestScore = 0;
+            if (text != null) {
+                highestScore = Integer.parseInt(text);
+            }
+            System.out.println(highestScore);
+            reader.close();
+            return highestScore;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }

@@ -26,7 +26,7 @@ public class Game extends JPanel implements Runnable {
     private float speedY = 0;
     private int gameState = GAME_START;
     private float score = 0;
-    private float highestScore = 0;
+    private float highestScore;
 
 
     public Game(){
@@ -40,6 +40,7 @@ public class Game extends JPanel implements Runnable {
         this.startImage = Loader.loadImage("resources/start/space_play.png");
         this.gameOverImage = Loader.loadImage("resources/end/gameover.png");
         this.endImage = Loader.loadImage("resources/end/play_again.png");
+        this.highestScore = Loader.loadHighestScore();
     }
 
     public void startGame() {
@@ -95,8 +96,8 @@ public class Game extends JPanel implements Runnable {
                 hero.draw(g);
                 obstacles.draw(g);
                 g.setColor(Color.WHITE);
-                g.drawString("SCORE: " + (int) score, getWidth()-80, 20);
-                g.drawString("HIGHEST: " + (int) highestScore, getWidth()-80, 40);
+                g.drawString("SCORE: " + (int) score, getWidth()-120, 20);
+                g.drawString("HIGHEST: " + (int) highestScore, getWidth()-120, 40);
                 break;
             case GAME_END:
                 background.draw(g);
