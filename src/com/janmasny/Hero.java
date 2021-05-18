@@ -55,7 +55,7 @@ public class Hero {
 
     public void jump() {
         jumpSound.flush(); //bugged
-        this.speedY += -12;
+        this.speedY += -20;
         this.y += (int) this.speedY;
         jumpSound.start(); //bugged
         onGround = false;

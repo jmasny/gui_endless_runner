@@ -13,14 +13,15 @@ public class Obstacles {
     private Zombie zombieTwo;
     private Zombie zombieThree;
     private Random random;
+    private int speedIncrease = 0;
 
     public Obstacles(Hero hero) {
         this.random = new Random();
         this.hero = hero;
         obstacleList = new ArrayList<Obstacle>();
-        this.zombieOne = new Zombie("resources/zombies/one/", 400, 39,28, 22, 60);
-        this.zombieTwo = new Zombie("resources/zombies/two/", 600, 36, 30, 26, 60);
-        this.zombieThree = new Zombie("resources/zombies/three/", 250, 41, 40, 22, 50);
+        this.zombieOne = new Zombie("resources/zombies/one/", 400, 39,28, 22, 60,8);
+        this.zombieTwo = new Zombie("resources/zombies/two/", 600, 36, 30, 26, 60, 4);
+        this.zombieThree = new Zombie("resources/zombies/three/", 250, 41, 40, 22, 50, 6);
         obstacleList.add(getRandomZombie());
     }
 
@@ -61,6 +62,7 @@ public class Obstacles {
                 zombie.setZombieBoundHeight(zombieOne.getZombieBoundHeight());
                 zombie.setDetectX(zombieOne.getDetectX());
                 zombie.setDetectY(zombieOne.getDetectY());
+                zombie.setSpeed(zombieOne.getSpeed()+speedIncrease);
                 break;
             case 1:
                 zombie.setZombieWalk(zombieTwo.getZombieWalk());
@@ -68,6 +70,7 @@ public class Obstacles {
                 zombie.setZombieBoundHeight(zombieTwo.getZombieBoundHeight());
                 zombie.setDetectX(zombieTwo.getDetectX());
                 zombie.setDetectY(zombieTwo.getDetectY());
+                zombie.setSpeed(zombieTwo.getSpeed()+speedIncrease);
                 break;
             case 2:
                 zombie.setZombieWalk(zombieThree.getZombieWalk());
@@ -75,8 +78,17 @@ public class Obstacles {
                 zombie.setZombieBoundHeight(zombieThree.getZombieBoundHeight());
                 zombie.setDetectX(zombieThree.getDetectX());
                 zombie.setDetectY(zombieThree.getDetectY());
+                zombie.setSpeed(zombieThree.getSpeed()+speedIncrease);
                 break;
         }
         return zombie;
         }
+
+    public int getSpeedIncrease() {
+        return speedIncrease;
+    }
+
+    public void setSpeedIncrease(int speedIncrease) {
+        this.speedIncrease = speedIncrease;
+    }
 }

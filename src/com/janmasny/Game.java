@@ -10,7 +10,7 @@ public class Game extends JPanel implements Runnable {
     public static final int GAME_START = 0;
     public static final int GAME_PLAY = 1;
     public static final int GAME_END = 2;
-    public static final float GRAVITY = 0.31f;
+    public static final float GRAVITY = 1.3f;
     public static final float FLOOR = 295;
     public static final int SPRITE_FLOOR = (int) FLOOR - 95;
     private BufferedImage titleImage;
@@ -27,6 +27,8 @@ public class Game extends JPanel implements Runnable {
     private int gameState = GAME_START;
     private float score = 0;
     private int highestScore;
+    private int speedIncrease = 0;
+    private int speedScoreThreshold = 25;
 
 
     public Game(){
@@ -59,8 +61,11 @@ public class Game extends JPanel implements Runnable {
     public void update() {
         switch(gameState) {
             case GAME_PLAY:
+                speedIncrease = (int) score / speedScoreThreshold;
+                background.setSpeedIncrease(speedIncrease);
                 background.update();
                 hero.update();
+                obstacles.setSpeedIncrease(speedIncrease);
                 obstacles.update();
                 if(!hero.getAlive()) {
                     gameState = GAME_END;

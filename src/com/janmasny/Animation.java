@@ -11,6 +11,10 @@ public class Animation {
     private int deltaTime;
     private long previousTime;
 
+    public Animation() {
+
+    }
+
     public Animation(int deltaTime) {
         this.deltaTime = deltaTime;
         this.frames = new ArrayList<BufferedImage>();

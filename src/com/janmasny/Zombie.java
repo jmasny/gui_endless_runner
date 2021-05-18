@@ -11,24 +11,20 @@ public class Zombie extends Obstacle {
     private Hero hero;
     private int detectX;
     private int detectY;
+    private int speed;
 
     public Zombie(Hero hero){
-        this.x = 700;
         this.y = Game.SPRITE_FLOOR;
-        this.zombieWalk = new Animation(500);
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_one.png"));
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_two.png"));
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_three.png"));
-        this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_four.png"));
         this.zombieBounds = new Rectangle();
         this.hero = hero;
     }
 
-    public Zombie(String path, int animationDelay, int detectX, int detectY, int detectWidth, int detectHeight){
+    public Zombie(String path, int animationDelay, int detectX, int detectY, int detectWidth, int detectHeight, int speed){
         this.x = 700;
         this.y = Game.SPRITE_FLOOR;
         this.detectX = detectX;
         this.detectY = detectY;
+        this.speed = speed;
         this.zombieWalk = new Animation(animationDelay);
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_one.png"));
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_two.png"));
@@ -39,7 +35,7 @@ public class Zombie extends Obstacle {
 
     @Override
     public void update() {
-        this.x += -5;
+        this.x += -speed;
         this.zombieWalk.update();
         this.zombieBounds.x = x + this.detectX;
         this.zombieBounds.y = y + this.detectY;
@@ -83,6 +79,14 @@ public class Zombie extends Obstacle {
 
     public void setDetectY(int detectY) {
         this.detectY = detectY;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public void setZombieBoundWidth(int width) {

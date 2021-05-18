@@ -18,8 +18,10 @@ public class Background {
     private BufferedImage fronttreesImage;
     private BufferedImage fartreesImage;
     private BufferedImage groundImage;
+    private int speedIncrease;
 
     public Background() {
+        this.speedIncrease = 0;
         this.fenceImageList = new ArrayList<BackgroundImage>();
         this.fogImageList = new ArrayList<BackgroundImage>();
         this.fronttreesImageList = new ArrayList<BackgroundImage>();
@@ -59,11 +61,11 @@ public class Background {
     }
 
     public void update() {
-        this.updateImageList(fartreesImageList, 1);
-        this.updateImageList(fronttreesImageList, 2);
-        this.updateImageList(fogImageList, 3);
-        this.updateImageList(fenceImageList, 4);
-        this.updateImageList(groundImageList, 5);
+        this.updateImageList(fartreesImageList, 1 + speedIncrease);
+        this.updateImageList(fronttreesImageList, 2 + speedIncrease);
+        this.updateImageList(fogImageList, 3 + speedIncrease);
+        this.updateImageList(fenceImageList, 4 + speedIncrease);
+        this.updateImageList(groundImageList, 5 + speedIncrease);
     }
 
     private void updateImageList(List<BackgroundImage> imageList, int speed) {
@@ -95,6 +97,10 @@ public class Background {
             g.drawImage(ground.image, ground.x, (int) Game.FLOOR - 60, null);
         }
 
+    }
+
+    public void setSpeedIncrease(int speedIncrease) {
+        this.speedIncrease = speedIncrease;
     }
 
     private class BackgroundImage {
