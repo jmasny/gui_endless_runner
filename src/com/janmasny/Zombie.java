@@ -14,6 +14,7 @@ public class Zombie extends Obstacle {
     private int speed;
 
     public Zombie(Hero hero){
+        this.zombieWalk = new Animation();
         this.y = Game.SPRITE_FLOOR;
         this.zombieBounds = new Rectangle();
         this.hero = hero;

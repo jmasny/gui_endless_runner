@@ -84,9 +84,6 @@ public class Obstacles {
         return zombie;
         }
 
-    public int getSpeedIncrease() {
-        return speedIncrease;
-    }
 
     public void setSpeedIncrease(int speedIncrease) {
         this.speedIncrease = speedIncrease;
