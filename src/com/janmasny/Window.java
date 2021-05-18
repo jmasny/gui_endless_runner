@@ -8,12 +8,14 @@ import java.awt.event.KeyListener;
 
 public class Window extends JFrame {
 
+    public static final int WINDOW_WIDTH = 544;
+    public static final int WINDOW_HEIGHT = 320;
     Game game;
 
     public Window() {
         super();
         this.setTitle("Zombie endless runner");
-        this.setSize(544, 320);
+        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.initComponents();

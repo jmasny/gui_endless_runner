@@ -13,8 +13,8 @@ public class Hero {
     private BufferedImage heroDeadImage;
     private Clip jumpSound;
     private Rectangle heroBounds;
-    private int x = 0;
-    private int y = 0;
+    private int x;
+    private int y;
     private float speedY = 0;
     private boolean alive;
     private boolean onGround;
@@ -33,7 +33,9 @@ public class Hero {
     }
 
     public void update() {
-        heroRunAnimation.update();
+        if (this.onGround) {
+            heroRunAnimation.update();
+        }
         // floor and jumping logic
         if ( y >= FLOOR - heroRunAnimation.getFrame().getHeight()) {
             speedY = 0;

@@ -12,6 +12,7 @@ public class Game extends JPanel implements Runnable {
     public static final int GAME_END = 2;
     public static final float GRAVITY = 0.31f;
     public static final float FLOOR = 295;
+    public static final int SPRITE_FLOOR = (int) FLOOR - 95;
     private BufferedImage titleImage;
     private BufferedImage startImage;
     private BufferedImage gameOverImage;
@@ -32,7 +33,7 @@ public class Game extends JPanel implements Runnable {
         this.thread = new Thread(this);
         this.hero = new Hero();
         this.hero.setX(0);
-        this.hero.setY(200);
+        this.hero.setY(SPRITE_FLOOR);
         this.background = new Background();
         this.obstacles = new Obstacles(hero);
         this.titleImage = Loader.loadImage("resources/start/zombie_endless_runner.png");
@@ -47,7 +48,7 @@ public class Game extends JPanel implements Runnable {
 
     public void resetGame() {
         hero.setX(0);
-        hero.setY(200);
+        hero.setY(SPRITE_FLOOR);
         hero.setAlive(true);
         hero.setOnGround(true);
         score = 0;

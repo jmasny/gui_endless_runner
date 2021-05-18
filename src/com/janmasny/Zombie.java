@@ -9,10 +9,12 @@ public class Zombie extends Obstacle {
     private Animation zombieWalk;
     private Rectangle zombieBounds;
     private Hero hero;
+    private int detectX;
+    private int detectY;
 
     public Zombie(Hero hero){
-        this.x = 800;
-        this.y = 200;
+        this.x = 700;
+        this.y = Game.SPRITE_FLOOR;
         this.zombieWalk = new Animation(500);
         this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_one.png"));
         this.zombieWalk.addFrame(Loader.loadImage("resources/zombies/one/walk_two.png"));
@@ -22,25 +24,25 @@ public class Zombie extends Obstacle {
         this.hero = hero;
     }
 
-    public Zombie(String path, int animationDelay){
-        this.x = 800;
-        this.y = 200;
+    public Zombie(String path, int animationDelay, int detectX, int detectY, int width, int height){
+        this.x = 700;
+        this.y = Game.SPRITE_FLOOR;
+        this.detectX = detectX;
+        this.detectY = detectY;
         this.zombieWalk = new Animation(animationDelay);
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_one.png"));
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_two.png"));
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_three.png"));
         this.zombieWalk.addFrame(Loader.loadImage(path + "walk_four.png"));
-        this.zombieBounds = new Rectangle();
+        this.zombieBounds = new Rectangle(width, height);
     }
 
     @Override
     public void update() {
         this.x += -5;
         this.zombieWalk.update();
-        this.zombieBounds.x = x;
-        this.zombieBounds.y = y;
-        this.zombieBounds.width = zombieWalk.getFrame().getWidth();
-        this.zombieBounds.height = zombieWalk.getFrame().getHeight();
+        this.zombieBounds.x = x + this.detectX;
+        this.zombieBounds.y = y + this.detectY;
     }
 
     @Override
@@ -63,16 +65,40 @@ public class Zombie extends Obstacle {
         return false;
     }
 
-    public int getX() {
-        return x;
-    }
-
     public void setX(int x) {
         this.x = x;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public int getDetectX() {
+        return detectX;
+    }
+
+    public void setDetectX(int detectX) {
+        this.detectX = detectX;
+    }
+
+    public int getDetectY() {
+        return detectY;
+    }
+
+    public void setDetectY(int detectY) {
+        this.detectY = detectY;
+    }
+
+    public void setZombieBoundWidth(int width) {
+        this.zombieBounds.width = width;
+    }
+
+    public void setZombieBoundHeight(int height) {
+        this.zombieBounds.height = height;
+    }
+
+    public int getZombieBoundWidth() {
+        return this.zombieBounds.width;
+    }
+
+    public int getZombieBoundHeight() {
+        return this.zombieBounds.height;
     }
 
     public void setZombieWalk(Animation zombieWalk) {

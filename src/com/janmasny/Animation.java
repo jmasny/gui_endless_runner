@@ -11,7 +11,6 @@ public class Animation {
     private int deltaTime;
     private long previousTime;
 
-
     public Animation(int deltaTime) {
         this.deltaTime = deltaTime;
         this.frames = new ArrayList<BufferedImage>();
@@ -19,7 +18,7 @@ public class Animation {
 
     public void update() {
 
-        if (System.currentTimeMillis() - previousTime > deltaTime) { //currenttimemilis returns current computer time in ms
+        if (System.currentTimeMillis() - previousTime > deltaTime) {
             this.frameIndex += 1;
             if (frameIndex >= frames.size()) {
                 frameIndex = 0;
