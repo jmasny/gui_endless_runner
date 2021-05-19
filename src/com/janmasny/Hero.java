@@ -40,7 +40,6 @@ public class Hero {
         if (this.onGround) {
             heroRunAnimation.update();
         }
-        // floor and jumping logic
         if ( y >= FLOOR - heroRunAnimation.getFrame().getHeight()) {
             speedY = 0;
             y = (int) FLOOR - heroRunAnimation.getFrame().getHeight();
@@ -55,8 +54,8 @@ public class Hero {
 
     public void jump() {
         jumpSound.flush(); //bugged
-        this.speedY += -20;
-        this.y += (int) this.speedY;
+        speedY += -20;
+        y += (int) speedY;
         jumpSound.start(); //bugged
         onGround = false;
     }

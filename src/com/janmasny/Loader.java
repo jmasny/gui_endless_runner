@@ -59,9 +59,8 @@ public class Loader {
         try {
             file = new File("resources/results/highest_score.txt");
             if(file.createNewFile()) {
-                System.out.println(file.getName());
+                //System.out.println(file.getName());
             }
-            System.out.println(file.getName());
             FileWriter writer = new FileWriter(file);
             String toSave = Integer.toString(highestScore);
             writer.write(toSave);

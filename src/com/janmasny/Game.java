@@ -17,8 +17,8 @@ public class Game extends JPanel implements Runnable {
     private BufferedImage startImage;
     private BufferedImage gameOverImage;
     private BufferedImage endImage;
-    private Clip backgroundMusic;
-    private Clip deathSound;
+    //private Clip backgroundMusic;
+    //private Clip deathSound;
     private Thread thread;
     private Hero hero;
     private Background background;

@@ -1,6 +1,6 @@
 ### Zombie endless runner game in Java
 
 ## To do:
-- [] wiecej klatek do bohatera
-- [] inne klatki do zombie
-- [] muzyka
+- biala ramka do zombie
+- muzyka
+- snippety z gry
